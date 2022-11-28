@@ -3,6 +3,7 @@ package com.example.test.entities;
 import java.time.LocalTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,7 @@ public class Book {
   private LocalTime date;
 
   @ManyToOne
-  @JoinColumn(name = "AuthorId")
+  @JoinColumn(name = "AuthorId", foreignKey = @ForeignKey(name = "FK_Authors_Books_id"))
   private Author author;
 
   public Long getId() {
