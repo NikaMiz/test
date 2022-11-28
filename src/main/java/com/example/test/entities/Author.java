@@ -1,8 +1,10 @@
 package com.example.test.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,20 +17,20 @@ public class Author {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "id", nullable = false)
+  @Column(name = "Id", nullable = false)
   private Long id;
 
-  @Column(name = "surname", nullable = false)
+  @Column(name = "Surname", nullable = false)
   private String surname;
 
-  @Column(name = "name", nullable = false)
+  @Column(name = "Name", nullable = false)
   private String name;
 
-  @Column(name = "patronymic")
+  @Column(name = "Patronymic")
   private String patronymic;
 
-  @OneToMany(mappedBy = "Author")
-  private List<Book> BooksList;
+  @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+  private List<Book> books = new ArrayList<>();
 
   public Long getId() {
     return id;

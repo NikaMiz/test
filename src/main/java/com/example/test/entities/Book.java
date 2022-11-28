@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,26 +16,27 @@ public class Book {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "id", nullable = false)
+  @Column(name = "Id", nullable = false)
   private Long id;
 
-  @Column(name = "author", nullable = false)
-  private String Author;
-
-  @Column(name = "isbn", nullable = false)
+  @Column(name = "ISBN", nullable = false, length = 13)
   private String isbn;
 
-  @Column(name = "title", nullable = false)
+  @Column(name = "Title", nullable = false)
   private String title;
 
-  @Column(name = "year", nullable = false)
+  @Column(name = "Year", nullable = false, length = 4)
   private String year;
 
-  @Column(name = "genre", nullable = false)
+  @Column(name = "Genre", nullable = false)
   private String genre;
 
-  @Column(name = "date", nullable = false)
+  @Column(name = "Date", nullable = false)
   private LocalTime date;
+
+  @ManyToOne
+  @JoinColumn(name = "AuthorId")
+  private Author author;
 
   public Long getId() {
     return id;
@@ -41,14 +44,6 @@ public class Book {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public String getAuthor() {
-    return Author;
-  }
-
-  public void setAuthor(String author) {
-    Author = author;
   }
 
   public String getIsbn() {
@@ -89,5 +84,13 @@ public class Book {
 
   public void setDate(LocalTime date) {
     this.date = date;
+  }
+
+  public Author getAuthor() {
+    return author;
+  }
+
+  public void setAuthor(Author author) {
+    this.author = author;
   }
 }
