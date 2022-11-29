@@ -1,5 +1,6 @@
 package com.example.test.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Authors")
-public class Author {
+public class Author implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,6 +32,23 @@ public class Author {
 
   @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
   private List<Book> books = new ArrayList<>();
+
+  public Author() {
+  }
+
+  public Author(String surname, String name, String patronymic) {
+    this.surname = surname;
+    this.name = name;
+    this.patronymic = patronymic;
+  }
+
+  public Author(Long id, String surname, String name, String patronymic, List<Book> books) {
+    this.id = id;
+    this.surname = surname;
+    this.name = name;
+    this.patronymic = patronymic;
+    this.books = books;
+  }
 
   public Long getId() {
     return id;
@@ -64,4 +82,12 @@ public class Author {
     this.patronymic = patronymic;
   }
 
+  @Override
+  public String toString() {
+    return "Author: " +
+            "id = " + this.id +
+            " surname = " + this.surname +
+            " name = " + this.name +
+            " patronymic = " + this.patronymic;
+  }
 }

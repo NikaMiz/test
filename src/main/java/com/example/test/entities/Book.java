@@ -40,6 +40,16 @@ public class Book implements Serializable {
   @JoinColumn(name = "AuthorId", foreignKey = @ForeignKey(name = "FK_Authors_Books_id"))
   private Author author;
 
+  public Book() {
+  }
+
+  public Book(String isbn, String title, String year, String genre) {
+    this.isbn = isbn;
+    this.title = title;
+    this.year = year;
+    this.genre = genre;
+  }
+
   public Long getId() {
     return id;
   }
