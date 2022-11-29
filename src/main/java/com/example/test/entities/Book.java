@@ -1,5 +1,6 @@
 package com.example.test.entities;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Books")
-public class Book {
+public class Book implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
