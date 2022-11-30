@@ -7,6 +7,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import org.springframework.data.jpa.repository.Query;
 
 @Path("/book")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -37,6 +38,12 @@ public class BookResource {
   @Path("/find/byAuthorId/{authorId}")
   public Response findAllByAuthorId(@PathParam("authorId") Long authorId) {
     return Response.status(Status.OK).entity(bookService.getAllByAuthorId(authorId)).build();
+  }
+
+  @GET
+  @Path("/find/byTitle")
+  public Response findBookByTitle(@QueryParam("title") String title){
+    return Response.ok().entity(bookService.findBookByTitle(title)).build();
   }
 
 
