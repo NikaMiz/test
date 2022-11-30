@@ -2,13 +2,20 @@ package com.example.test.resources;
 
 import com.example.test.entities.Author;
 import com.example.test.services.AuthorService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Path("/author")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class AuthorResource {
 
     private final AuthorService authorService;
@@ -20,18 +27,15 @@ public class AuthorResource {
 
     @POST
     @Path("/save")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public Response save(Author author) {
         return Response.status(Response.Status.OK).entity(authorService.save(author)).build();
     }
 
     @DELETE
-    @Path("/delete")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response delete(Author author) {
-        authorService.delete(author);
-        return Response.status(Response.Status.OK).build();
+    @Path("/delete/{id}")
+    public Response delete(@PathParam("id") Long id) {
+        authorService.delete(id);
+        return Response.ok().build();
     }
 
     @GET

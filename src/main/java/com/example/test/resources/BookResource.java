@@ -3,13 +3,14 @@ package com.example.test.resources;
 import com.example.test.entities.Book;
 import com.example.test.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 @Path("/book")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class BookResource {
 
   private final BookService bookService;
@@ -21,18 +22,15 @@ public class BookResource {
 
   @POST
   @Path("/save")
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
   public Response save(Book book) {
     return Response.status(Response.Status.OK).entity(bookService.save(book)).build();
   }
 
   @DELETE
-  @Path("/delete")
-  @Consumes(MediaType.APPLICATION_JSON)
-  public Response delete(Book book) {
-    bookService.delete(book);
-    return Response.status(Response.Status.OK).build();
+  @Path("/delete/{id}")
+  public Response delete(@PathParam("id") Long id) {
+    bookService.delete(id);
+    return Response.ok().build();
   }
 
   @GET

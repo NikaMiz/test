@@ -3,7 +3,6 @@ package com.example.test.services;
 import com.example.test.entities.Book;
 import com.example.test.repositories.BookRepository;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +20,9 @@ public class BookService {
     return bookRepository.save(book);
   }
 
-  public void delete(Book book) {
-    bookRepository.delete(book);
+  public void delete(Long id) {
+    bookRepository.deleteById(id);
+
   }
 
   public List<Book> getAllByAuthorId(Long id) {

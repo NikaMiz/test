@@ -33,8 +33,11 @@ public class Book implements Serializable {
   @Column(name = "Genre", nullable = false)
   private String genre;
 
-  @Column(name = "Date", nullable = true)
+  @Column(name = "Date", nullable = false)
   private LocalTime date;
+
+//  @Column(name = "AuthorId", nullable = false)
+//  private Long authorId;
 
   @ManyToOne
   @JoinColumn(name = "AuthorId", foreignKey = @ForeignKey(name = "FK_Authors_Books_id"))
@@ -115,4 +118,6 @@ public class Book implements Serializable {
   public void setAuthor(Author author) {
     this.author = author;
   }
+
 }
+

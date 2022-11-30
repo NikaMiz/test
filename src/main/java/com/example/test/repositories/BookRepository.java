@@ -10,10 +10,6 @@ public interface BookRepository extends CrudRepository<Book, Long> {
 
   List<Book> findAllByAuthorId(Long id);
 
-  Book save(Book book);
-
-  void delete(Book book);
-
   @Override
   List<Book> findAll();
 }

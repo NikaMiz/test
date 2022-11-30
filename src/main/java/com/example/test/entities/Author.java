@@ -3,6 +3,7 @@ package com.example.test.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,10 +31,14 @@ public class Author implements Serializable {
   @Column(name = "Patronymic")
   private String patronymic;
 
-  @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "author", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<Book> books = new ArrayList<>();
 
   public Author() {
+  }
+
+  public Author(Long id) {
+    this.id = id;
   }
 
   public Author(String surname, String name, String patronymic) {
