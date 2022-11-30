@@ -33,7 +33,7 @@ public class Book implements Serializable {
   @Column(name = "Genre", nullable = false)
   private String genre;
 
-  @Column(name = "Date", nullable = false)
+  @Column(name = "Date", nullable = true)
   private LocalTime date;
 
   @ManyToOne
@@ -48,6 +48,16 @@ public class Book implements Serializable {
     this.title = title;
     this.year = year;
     this.genre = genre;
+  }
+
+  public Book(Long id, String isbn, String title, String year, String genre, LocalTime date, Author author) {
+    this.id = id;
+    this.isbn = isbn;
+    this.title = title;
+    this.year = year;
+    this.genre = genre;
+    this.date = date;
+    this.author = author;
   }
 
   public Long getId() {
